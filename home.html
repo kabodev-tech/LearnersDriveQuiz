@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="Learners Drive Licence Quiz" /> 
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; frame-ancestors 'none'; form-action 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:;">    -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Quiz" />
+    <title>Learners Drive Licence Quiz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+    * {
+         margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+
+    body {
+        background: linear-gradient(95deg, #000000, #0f264c);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        color: #fff;
+    }
+
+    /* Preloader */
+/* Full-screen overlay container */
+#preloader {
+    position: fixed;
+  /* top: 0; */
+  /* left: 0; */
+    inset: 0;
+    width: 100%;
+    height: 100vh;
+    background: #0f172a; /* dark background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999; /* Ensures it sits above everything else */
+
+   /* Smooth fade animation */
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 1s ease, visibility 1s ease;
+}
+
+/* Center alignment for spinner and text */
+.loader-content {text-align: center;}
+/* The spinning visual element */
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3; /* Light grey background ring */
+    border-top: 5px solid #0056b3; /* Blue spinning accent */
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 15px auto;
+  
+    /* animation: loader 0.8s linear infinite; */
+    /* -webkit-animation: loader 0.8s linear infinite; */
+}
+
+/* Loading text typography */
+.loading-text {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  color: #ffffff;
+  margin: 0;
+  font-weight: 500;
+}
+
+@keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+        border: 4px solid #f44336;
+        border-left-color: transparent;
+    }
+    50% {
+        -webkit-transform: rotate(180deg);
+        transform: rotate(180deg);
+        border: 4px solid #673ab7;
+        border-left-color: transparent;
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+        border: 4px solid #f44336;
+        border-left-color: transparent;
+    }
+}
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        border: 4px solid #f44336;
+        border-left-color: transparent;
+    }
+    50% {
+        -webkit-transform: rotate(180deg);
+        border: 4px solid #673ab7;
+        border-left-color: transparent;
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        border: 4px solid #f44336;
+        border-left-color: transparent;
+    }
+}
+
+/* Class to trigger fade-out via JS */
+.preloader-hidden {opacity: 0; visibility: hidden;}
+
+.navbar{
+    display:flex;
+    gap:20px;
+    background:rgba(255,255,255,0.08);
+    padding:15px 30px;
+    border-radius:50px;
+    backdrop-filter:blur(10px);
+    box-shadow:0 8px 20px rgba(0,0,0,0.3);
+}
+
+.navbar a{
+    color:#fff;
+    text-decoration:none;
+    font-size:16px;
+    font-weight:500;
+    transition:0.3s ease;
+    position:relative;
+}
+
+.navbar a::after{
+    content:'';
+    position:absolute;
+    left:0;
+    bottom:-5px;
+    width:0%;
+    height:2px;
+    background:#38bdf8;
+    transition:0.3s;
+}
+
+.navbar a:hover::after{width:100%;}
+
+.navbar a:hover{color:#38bdf8;}
+/* =========================
+   HEADER   */
+.header{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px 40px;
+    margin-bottom:40px;
+}
+
+section{
+    max-width: 100vh;
+    margin: 10px 0;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    /* letter-spacing: 1px; */
+    /* border: 1px #673ab7 ; */
+    background: rgba(255, 255, 255, 0.08);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: #0056b3;
+    justify-content: space-between;
+}
+
+h2{margin: 10px 0; color: #ff0000;}
+
+.line{
+    margin: 5px 0;
+    color: yellow; 
+    width: 50vh;
+    height: 0.1rem;
+    background: #000;
+    text-align: center;
+    align-content: center;
+    display: flex;
+    flex-direction: column;
+    display: none;
+}
+
+.heading{margin: 10px 0px; color: #ff0;}
+
+.info{margin: 5px 0; color: #fff; font-size: 13px; font-weight: 500; }
+
+.info h3{margin: 10px 0; color: #ff0;}
+
+.group-btn{margin: 10px 0;}
+
+.quiz-btn{
+    margin: 15px 5px;
+    width: 25vh;
+    height: 6vh; 
+    text-align: center;
+    font-size: 25px;
+    font-weight: 600;
+    color: #673ab7; 
+    background: #fff;
+    border-radius: 20px;
+    cursor: pointer;
+    left: 50%;
+}
+
+.quiz-btn:hover{
+    font-style: italic;
+    font-weight: 700;
+    border: 2px #38bdf8 solid;
+    border-radius: 20px;
+    background: linear-gradient(95deg, #38bdf8, #0f264c);
+    color: #fff;
+    transition: ease-in-out;
+}
+
+/* FOOTER SECTION */
+.footer{
+    margin: 10px 10px; 
+    /* background: #423d3d;  */
+    text-align: center; 
+    display: flex;
+    flex-direction: column;
+    width: 100vh;
+}
+
+.copyrights{margin: 10px 0}
+
+.copyrights a{
+    text-decoration: none; 
+    color: #12ca9f; 
+    cursor: pointer; 
+    font-weight: 500; 
+    /* text-decoration: underline;  */
+    text-transform: capitalize; 
+    font-style: italic; 
+    font-weight: 600; 
+    font-family: cursive;
+    }
+</style>
+</head>
+
+<body>    
+<!-- Page Preloader -->
+    <div id="preloader">
+        <div class="loader-content">
+            <div class="spinner"></div>
+            <p class="loading-text">Loading...</p>
+        </div>
+    </div>
+        <header class="header">
+            <!-- <a href="#" class="logo">Yuth Portal</a> -->
+            <nav class="navbar">
+                <a href="home.html">Home</a>
+                <a href="#">Info</a>
+                <a href="#">Help</a>
+                <a href="#">Vacancy</a>
+            </nav>
+        </header>
+
+    <section>
+        <h2>&#9888; Disclaimer  Note! &#9888;</h2>
+        <!-- <span class="line"></span> -->
+        <!-- <span class="heading"> Disclaimer </span> -->
+        <span class="info">
+            <h3>1. Not an official test</h3> 
+            <ul>
+                This quiz is for Educational and Practical purposes only. <br>
+                It is not affiliated with, endorsed by, or
+                a substitute for <br> any government <br> DMV, DPS, or licensing authority. 
+            </ul>
+        </span>
+        <span class="line"></span>
+        <span class="info">
+            <ul>
+                <h3>2. No guarantee of accuracy</h3> 
+                Questions and answers are generated from <br> 
+                publicly available sources <br>
+                and may not reflect current laws, rules, or regulations. <br> Always consult your local
+                licensing agency's official handbook.
+            </ul>
+        </span>
+        <span class="line"></span>
+        <span class="info">
+            <ul>
+                <h3>3. Does not certify or replace real exams</h3> 
+                Passing this quiz game does not grant or imply any legal <br> 
+                driving privilege, license, or certification. You must still complete <br>
+                all official requirements and pass the actual licensing examination.
+            </ul>
+        </span>
+        <span class="line"></span>
+        <span class="info">
+            <ul>
+                <h3>4. Regional law variations</h3>
+                Traffic laws, road signs, and licensing requirements <br> 
+                vary by state, province or country. <br> 
+                This game may not cover the specific rules applicable to your area. <br> 
+                check your local laws before operating a vehicle. 
+            </ul>
+        </span>
+        <div class="group-btn">
+            <button class="quiz-btn" id="quiz">Access Quiz</button>
+            <!-- <button class="quiz-btn" id="code8">Code 8</button> -->
+            <!-- <button class="quiz-btn" id="code10">Code 10</button>  -->
+            <!-- <button class="quiz-btn" id="code14">Code 14</button>  -->
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer">
+            <span class="publisher"> 2026 powered by Pampierstad Youth Center</span>
+            <!-- <br> -->
+            <span class="copyrights">
+            &copy; developed by 
+            <a href="https://www.kamtechholding.co.za" >kamtech holdings.</a> &reg; all rights reserved.
+            </span>
+        </div>
+    </footer>
+
+<script>
+        // PRELOADER
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('preloader');
+            
+        // Add the class that triggers the CSS fade-out transition
+            preloader.classList.add('preloader-hidden');
+
+            setTimeout(() => {
+                // preloader.remove();
+                preloader.style.opacity = '0';
+                preloader.style.visibility = 'hidden';
+                // Completely remove the element from the DOM after the 0.5s fade finishes
+                setTimeout(() => {
+                preloader.remove();
+                }, 1200);
+            }, 1500);
+        });
+
+
+
+        // Auto redirect to quiz page on button click
+        document.getElementById('quiz').onclick = function() { 
+            window.location.href = 'index.html'; 
+        }
+
+        // document.getElementsByClassName('quiz')[0].addEventListener('click', function() {
+        //     window.location.href = 'index.html';
+        // });
+
+       
+</script>
+   
+
+</body>
+</html>

@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Learners Drive Licence Quiz" /> 
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; frame-ancestors 'none'; form-action 'self'; script-src 'self';">    -->
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0" /> -->
+    <meta name="author" content="Quiz" />
+    <title>Learners Drive Licence Quiz</title>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script> -->
+    <link rel="stylesheet" href="style/style.css">
+    <style>
+        
+    </style>
+</head>
+
+<body>
+<!-- Page Preloader -->
+    <div id="preloader">
+        <div class="loader"></div>    
+    <p class="loading-text">Loading quiz session...</p>
+    </div>
+
+    <div class="quiz-container">
+        <div class="top-bar">
+            <div>Learners Drive Licence Quiz</div>
+            <div class="timer">Time: <span id="time">00:00</span>s</div>
+        </div>
+
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+
+        <!-- <button onclick="toggleTheme()">
+        Toggle Theme
+        </button> -->
+
+        <div class="content" id="app"></div>
+
+    </div>
+
+    <!-- <script src="script/internetCheck.js"></script> -->
+    
+<script>
+    // Disable right-click context menu
+    // document.addEventListener('contextmenu', function (e) {
+    // e.preventDefault();
+    // });
+
+    // PRELOADER
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader') || document.getElementById('preloder');
+            if (!preloader) return;
+
+            setTimeout(() => {
+                preloader.style.opacity = '0';
+                preloader.style.visibility = 'hidden';
+            }, 1200);
+        });
+
+        const app = document.getElementById("app");
+        const timeEl = document.getElementById("time");
+
+        let currentQuestion = 0;
+        let selectedAnswers = [];
+        let score = 0;
+        let timer = 2 * 60; // 2 minutes for quiz
+        let countdown;
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+        // TIMER COLOR UPDATE FUNCTIONS 
+        function updateTimerColor() {
+            const timerEl = document.querySelector(".timer");
+            timerEl.classList.remove("green", "yellow", "red");
+            if (timer <= 60) {
+                timerEl.classList.add("red");
+            } else if (timer <= 180) {
+                timerEl.classList.add("yellow");
+            } else {
+                timerEl.classList.add("green");
+            }
+        }
+
+        function updateProgressBarColor() {
+            const bar = document.getElementById("progressBar");
+            bar.classList.remove("green", "yellow", "red");
+            if (timer <= 60) {
+                bar.classList.add("red");
+            } else if (timer <= 180) {
+                bar.classList.add("yellow");
+            } else {
+                bar.classList.add("green");
+            }
+        }
+
+    // QUESTIONS DATA 
+    let questions = [
+        // ==================== ENTRY LEVEL ====================
+        // ==================== RULES of ROAD (30 QUESTIONS) ====================
+        {
+            //1 
+            numb: 1,
+            level: "Entry Level",
+            question: "When moving off from a stationary position at the side of the road, what is the responsibility of the driver?",
+            options: [
+                "A. The driver must join other traffic as quickly as possible", 
+                "B. The driver must indicate his or her intention and then move off", 
+                "C. The driver must ensure that it is safe and that he or she will not interfere with traffic appraoching from any direction", 
+                "D. The driver must turn off his or her engine to avoid coursing accident"],
+            answer: 2
+        },
+        {
+            // 2 
+            numb: 2,
+            level: "Entry Level",
+            question: "Which language is used for styling websites?",
+            options: [
+                "A. Python", 
+                "B. CSS", 
+                "C. Java", 
+                "D. PHP"
+            ],
+            answer: 1
+        
+        },
+        {    
+            numb: 3,
+            level: "Entry Level", 
+            question: "Which side of the roadway may you drive if the roadway is wide enough without endangering other traffic?",
+            // answer: "B. A driver may encroach or drive on the right-hand of a roadway if the car/vehicle in front driving slowly",
+            options: [
+            "A. A driver shall drive on the left side of the roadway",
+            "B. A driver may encroach or drive on the right-hand of a roadway if the vehicle in front driving slowly",
+            "C. A driver may drive on the right-hand side provided there is no traffic",
+            "D. A driver may drive off the yellow line to avoid coursing accident",           
+        ],
+            answer: 1
+        },
+        {
+            // 4
+            numb: 4,
+            level: "Entry Level", 
+            question: "A temporary sign...",
+            // answer: "A. has the same legal significance as a permanent sign.",
+            options: [
+            "has the same legal significance as a permanent sign.",
+            "need not be taken seriously at all times of the day",
+            "is of less consequence to road users than a permanent sign",
+            "must be ignored by all drivers to avoid distraction while driving.",
+        ],
+            answer: 0
+        },
+        {
+        //    5 
+            numb: 5,
+            level: "Entry Level",
+            question: "What type of heavy motor vehicle or combinations of motor vehicles are restricted to travel at a maximum speed of 80 km/h?",
+            // answer: "C. An articulated motor vehicles of which the gross combination mass of truck tractor exceeds 9 000 kg.",
+            options: [
+            "A. Any heavy motor vehicle carrying goods",
+            "B. Only vehicles carrying goods which belong to the government and traffic police",
+            "C. An articulated motor vehicles of which the gross combination mass of truck tractor exceeds 9 000 kg.",
+            "D. Any vehicle carrying livestock such as goats, cow, sheeps or passangers more than 10.", 
+        ],
+            answer: 2
+        },
+        {
+            // 6
+            numb: 6,
+            level: "Entry Level",
+            question: "When driving a motor vehicle, what is the minimum safe following distance to maintain when following another vehicle?",
+            // answer: "A. A distance determined by means of the two second rule",
+            options: [
+            "A. A distance determined by means of the 2 or 3 second rule",
+            "B. A driver may drive as close as possible so that overtaking will be easier",
+            "C. Five metres at 100 km/h",
+            "D. One metres at 60 km/h",
+            ],
+            answer: 0
+        },
+        {
+            // 7
+            numb: 7,
+            level: "Entry Level",
+            question: "Trailor of which the gross vehicle mass does not exceed 10 000 kg...",
+            // answer: "D. Shall be fitted with yellow reflective material to the sides and the road of the vehicle", 
+            options: [
+                "A. Shall be fitted with yellow reflective material to the sides of the vehicle only",
+                "B. Shall not fitted any material on the vehicle to avoid distracting traffic",
+                "C. Shall be fitted with yellow reflective material to the sides and the road of the vehicle",
+                "D. Are not required to fit yellow reflective material to the vehicle",
+            ],
+            answer: 3
+        }, 
+        {
+            // 8
+            numb: 8,
+            level: "Entry Level",
+            question: "What is the duty of a driver when felling the fuel tank with petrol or inflamation fuel?",
+            // answer: "A. The driver may not cause or allow the engine to run whilst petrol or other inflammable fuel is being transferred to the fuel tank",
+            options: [
+                "A. The driver may not cause or allow the engine to run whilst petrol or other inflammable fuel is being transferred to the fuel tank",
+                "B. He or she may only allow the engine to run if diesel is being transferred to the fuel tank",
+                "C. He or she may start the engine whilst petrol or other inflammable fuel is being transferred to check if the fuel tank is fuel",
+                "D. The driver may take a smoke brake next to the vehicle whilest petrol or other inflammable fuel is being transferred to the fuel tank",
+            ],
+            answer: 0
+    },
+        {
+            // 9
+            numb: 9,
+            level: "Entry Level",
+            question: "Which one of the following statements is correct?",
+            // answer: "A. Pedal cycles are not permitted on a freeway",
+            options: [
+                "A. Pedal cycles are not permitted on a freeway",
+                "B. Racing cycles may be ridden on a freeway during the day only",
+                "C. Pedal cycles may only be ridden on the shoulder of a freeway",
+                "D. Pedal cycles are only permitted on a freeway during olympics", 
+            ], 
+            answer: 0
+        },
+        {
+            // 10
+            numb: 10,
+            level: "Entry Level",
+            question: "When is overtaking prohibited?",
+            // answer: "A. When approaching any place when passing could cause a hazard to traffic appraoching from the opposite direction",
+            options: [
+                "A. When approaching any place when passing could cause a hazard to traffic appraoching from the opposite direction",
+                "B. When passing a school",
+                "C. When driving at night",
+                "D. Only when a passanger is late to work",
+            ],
+            answer: 0
+        },
+        {
+            numb: 11,
+            level: "Entry Level",
+            question: "In order to draw attention, the background of temporary signs is usually ...",
+            // answer: "B. Yellow",
+            options: [
+                "A. White",
+                "B. Yellow",
+                "C. Yellow and White",
+                "D. Red and White",
+            ],
+            answer: 1
+        },
+        {
+            numb: 12,
+            level: "Entry Level",
+            question: "What is the function of a clutch",
+            // answer: "A. It is used to disconnect the engine from the transmission",
+            options: [
+            "A. It is used to disconnect the engine from the transmission",
+            "B. It is used to reduce the speed of a vehicle",
+            "C. It is used to freewheel down the hill",
+            "D. It is used to stop the vehicle",
+        ],
+        answer: 0
+    },
+        {
+            numb: 13,
+            level: "Entry Level",
+            question: "What is the requirement regarding noise caused by a heavy motor vehicle?",
+            // answer: "B. No person shall operate a vehicle on a public road in such a manner that it cause excessive noise.",
+            options: [
+                "A. A person may operate a vehicle causing excessive noise, but only at night",
+                "B. No person shall operate a vehicle on a public road in such a manner that it cause excessive noise.",
+                "C. A person may operate a vehicle causing excessive noise outside town",
+                "D. When passangers are going or coming from a party.",
+            ],
+            answer: 1
+        },
+        {
+            numb: 14,
+            level: "Entry Level",
+            question: "When is it permissible to park in a ''no stoping'' area?",
+            // answer: "C. It is not permissible to park where stopping is not permitted",
+            options: [
+                "A. Parking is permissible, however, only stopping is not permissible",
+                "B. Only if no other parking area is available",
+                "C. It is not permissible to park where stopping is not permitted",
+                "D. Only when there no traffic officer monitoring that area",
+            ],
+            answer: 2
+        },
+        // 15
+        // 16
+        // 17
+        // 18
+        // 19
+        // 20
+        // 21
+        // 22
+        // 23
+        // 24
+        // 25
+
+        // ============================ HARD LEVEL ============================
+        // ============================ ROAD TRAFFIC SIGNS, SIGNALS and MARKING (30 QUESTIONS)  ============================
+        {
+            numb: 15, 
+            level: "Hard",
+            question: "What does this sign indicate to the driver?", 
+            image: "images/Vehicles conveying dangerous goods only sign.png", 
+            // answer: "C. Vehicles conveying dangerous goods only sign", 
+            options:[
+                "A. only vehicles carrying petrol/desiel allowed on the road",
+                "B. there is a petrol or desiel mine ahead",
+                "C. Vehicles conveying dangerous goods only sign",
+                "D. giveway to vehicles conveying dangerous goods",
+            ],
+            answer: 2
+        },
+        {
+            numb: 16,
+            level: "Hard",
+            image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085",
+            question: "Which field is related to this setup?",
+            options: ["A. Cooking", "B. Programming", "C. edicine", "D. Architecture"],
+            answer: 1
+        },
+
+        // ============================ Guidance Information Sign (10 Question) ============================
+
+
+        {
+            numb: 18,
+            level: "Hard",
+            question: "What will this road marking indicate to the driver?",
+            image: "images/Lanes are reducing from the right.png",
+            // answer: "B. Lanes are reducing from the right",
+            options: [
+                "A. No overtaking is permitted",
+                "B. Lanes are reducing from the right",
+                "C. The vehicle in the right hand lane has right of way",
+                "D. Only vehicle in the right hand allowed to overtake",
+            ],
+            answer: 1
+        },
+        {
+            numb: 19,
+            level: "Hard",
+            question: "This sign indicates to the driver that ...",
+            image: "images/road works ahead temporary.png", 
+            //answer: "D. there is road works ahead temporary",
+            options: [
+                "A. there are obstruction in the road",
+                "B. there are raod works within ahead",
+                "C. there are obstruction no the road ahead that affect the traffic movement",
+                "D. there is a temporary road works ahead"
+            ],
+            answer: 3 
+        },
+        // ============================ Regurla Signs and Warning (10 Question) ============================
+        
+        {
+            numb: 20,
+            level: "Hard",
+            question: "This sign indicates to the driver of a vehicle that ...",
+            image: "images/Railway crossing ahead.jpg",
+            //answer: "A. there is railway crossing ahead",
+            options: [
+                "A. there is railway crossing ahead",
+                "B. only trains allowed to cross",
+                "C. there is train station ahead",
+                "D. there is a train zone ahead",
+            ],
+            answer: 0
+        },
+        {
+            numb: 21,
+            level: "Hard",
+            question: "When approaching this sign, the driver knows that ...",
+            image: "images/lane added to the left.png", 
+            //answer: "A. a lane is added to the left of a twi-way roadway",
+            options: [
+                "A. a lane is added to the left of a twi-way roadway",
+                "B. the people driving on the lfet side of the road must turn left",
+                "C. vehicles may be overtaken on the left side from there on",
+                "D. he or she must turn left ahead",
+            ],
+            answer: 0
+        },
+
+        // ============================ HARDER LEVEL ============================
+        // ============================ VEHICLE CONTROL (8 QUESTIONS) ============================
+        {
+            // numb: 17,
+            level: "Harder",
+            question: "To select a gear, you must select which number",
+            image: "images/gear select.png",
+            // answer: "B. 5 and 3",
+            options: [
+                "6 and 3",
+                "5 and 3",
+                "3 and 5",
+                "3 and 7",
+            ],
+            answer: 1
+        },
+        {
+            level: "Harder",
+            image: "https://images.unsplash.com/photo-1526379095098-d400fd0bf935",
+            question: "What is cybersecurity mainly used for?",
+            options: [
+                "A. Cooking food",
+                "B. Protecting digital systems",
+                "C. Cleaning computers",
+                "D. Playing games"
+            ],
+            answer: 1
+        },
+        {
+            level: "Harder",
+            image: "https://images.unsplash.com/photo-1518770660439-4636190af475",
+            question: "What component is visible on the motherboard?",
+            options: [
+                "A. CPU", 
+                "B. Keyboard", 
+                "C. Monitor", 
+                "D. Mouse"
+            ],
+            answer: 0
+        }
+
+    ];
+
+        // START SCREEN
+        function showIntro() {
+            app.innerHTML = `
+        <!-- <h1>Welcome To Learners Drive Licence Quiz</h1> -->
+
+        <p>
+          Test your knowledge across 3 exciting sections:
+        </p>
+
+        <br>
+
+        <ul style="padding-left:20px; line-height:2;">
+          <li>Entry Level</li>
+          <li>Hard</li>
+          <li>Harder</li>
+        </ul>
+
+        <br>
+
+        <h2>Instructions</h2>
+
+        <p>
+          • Read each question carefully.<br>
+          • Sections 2 and 3 contain image questions.<br>
+          • Click an option to answer.<br>
+          • Use Next & Previous buttons to navigate.<br>
+          • Quiz auto submits when time runs out.<br>
+          • Your results will display at the end.
+        </p>
+
+        <div class="btn-group">
+          <button class="primary" onclick="startQuiz()">
+            Start Quiz
+          </button>
+        </div>
+      `;
+        }
+
+        // START QUIZ
+        function startQuiz() {
+            currentQuestion = 0;
+            selectedAnswers = [];
+            timer = 5 * 60; // 5 minute for quiz
+            timeEl.innerText = timer;
+            shuffleArray(questions);
+            updateTimerColor();
+            updateProgressBarColor();
+            startTimer();
+            showQuestion();
+        }
+
+        // TIMER
+        function startTimer() {
+            clearInterval(countdown);
+            countdown = setInterval(() => {
+                if (timer <= 0) {
+                    clearInterval(countdown);
+                    showResults();
+                    return;
+                }
+
+                timer--;
+                timeEl.innerText = timer;
+                updateTimerColor();
+                updateProgressBarColor();
+            }, 1000);
+        }
+
+        // SHOW QUESTION
+        function showQuestion() {
+            const q = questions[currentQuestion];
+            const progress =
+                ((currentQuestion + 1) / questions.length) * 100;
+            document.getElementById("progressBar").style.width = progress + "%";
+
+            app.innerHTML = `
+        <div class="question-count">
+          Question ${currentQuestion + 1} of ${questions.length}
+        </div>
+
+        <h2>${q.level}</h2>
+
+        ${q.image ? `<img src="${q.image}" class="quiz-image">` : ""}
+
+        <div class="question">${q.question}</div>
+
+        <div class="options">
+          ${q.options.map((option, index) => `
+            <div class="option ${selectedAnswers[currentQuestion] === index ? 'selected' : ''}" 
+                 onclick="selectOption(${index})">
+              ${option}
+            </div>
+          `).join("")}
+        </div>
+
+        <div class="btn-group">
+          ${currentQuestion > 0 ? `
+            <button class="secondary" onclick="prevQuestion()">
+              Previous
+            </button>
+          ` : ""}
+
+          <button class="primary" onclick="nextQuestion()">
+            ${currentQuestion === questions.length - 1 ? "Finish Quiz" : "Next"}
+          </button>
+        </div>
+      `;
+        }
+
+        // SELECT OPTION
+        function selectOption(index) {
+            selectedAnswers[currentQuestion] = index;
+            showQuestion();
+        }
+
+        // NEXT QUESTION
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                showQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        // PREVIOUS QUESTION
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                showQuestion();
+            }
+        }
+
+        // SHOW RESULTS
+        function showResults() {
+            clearInterval(countdown);
+
+            score = 0;
+            questions.forEach((q, index) => {
+                if (selectedAnswers[index] === q.answer) {
+                    score++;
+                }
+            });
+            const percentage = Math.round((score / questions.length) * 100);
+            localStorage.setItem("highScore", percentage);
+
+            let status = "";
+
+            if (percentage < 50) {
+                status = "Fail";
+            } else if (percentage < 80) {
+                status = "Pass";
+            } else {
+                status = "Excellent";
+            }
+
+            app.innerHTML = `
+        <div class="result-box">
+
+          <h1>Quiz Completed</h1>
+
+          <div class="score">${percentage}%</div>
+
+          <div class="status">${status}</div>
+
+          <p>
+            You answered ${score} out of ${questions.length} questions correctly.
+          </p>
+
+          <div class="btn-group">
+            <button class="primary" onclick="restartQuiz()">
+              Try Again
+            </button>
+
+            <button class="secondary" onclick="reviewAnswers()">
+              Preview Results
+            </button>
+
+            <button class="secondary" onclick="exitQuiz()">
+              Exit
+            </button>
+          </div>
+
+        </div>
+      `;
+        }
+
+        // REVIEW ANSWERS
+        function reviewAnswers() {
+            app.innerHTML = `
+        <h1>Quiz Review</h1>
+
+        ${questions.map((q, index) => `
+          <div class="review-item">
+
+            <h3>
+              ${index + 1}. ${q.question}
+            </h3>
+
+            <p>
+              Your Answer:
+              <span class="${selectedAnswers[index] === q.answer ? 'correct' : 'wrong'}">
+                ${selectedAnswers[index] !== undefined
+                    ? q.options[selectedAnswers[index]]
+                    : "No Answer"}
+              </span>
+            </p>
+
+            <p class="correct">
+              Correct Answer: ${q.options[q.answer]}
+            </p>
+
+          </div>
+        `).join("")}
+
+        <div class="btn-group">
+          <button class="primary" onclick="showResults()">
+            Back To Results
+          </button>
+        </div>
+      `;
+        }
+
+        // RESTART QUIZ
+        function restartQuiz() {
+            currentQuestion = 0;
+            selectedAnswers = [];
+            score = 0;
+            timer = 2 * 60; // 1 minute for retake
+            timeEl.innerText = timer;
+            startQuiz();
+        }
+
+        // EXIT QUIZ
+        function exitQuiz() {
+            // location.reload();
+            window.location.href = "home.html";
+
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle("theme-dark");
+        }
+
+        // INIT
+        showIntro();
+</script>
+
+</body>
+
+</html>
