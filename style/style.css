@@ -305,7 +305,7 @@ button {
     color: #f87171;
 }
 
-@media(max-width:600px) {
+@media(max-width:768px) {
     .question {
         font-size: 18px;
     }
