@@ -17,18 +17,19 @@
      crossorigin="anonymous"></script>
 <style>
     * {
-         margin: 0;
+        margin: 0;
         padding: 0;
         box-sizing: border-box;
-        font-family: Arial, sans-serif;
+        font-family: Arial, sans-serif; 
+        scroll-behavior: smooth;
     }
 
     body {
         background: linear-gradient(95deg, #000000, #0f264c);
         display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
+        flex-direction: column; 
+        align-items: center; 
+        justify-content: center; 
         padding: 20px;
         color: #fff;
     }
@@ -204,10 +205,10 @@ h2{margin: 10px 0; color: #ff0000;}
 
 .quiz-btn{
     margin: 15px 5px;
-    width: 25vh;
+    width: 30vh;
     height: 6vh; 
     text-align: center;
-    font-size: 25px;
+    font-size: 20px;
     font-weight: 600;
     color: #673ab7; 
     background: #fff;
@@ -249,6 +250,39 @@ h2{margin: 10px 0; color: #ff0000;}
     font-weight: 600; 
     font-family: cursive;
     }
+
+
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+        align-items: center;
+        text-align: center;
+    }
+
+    /* .navbar {
+        flex-direction: column;
+        gap: 10px;
+    } */
+
+    section {
+        width: fit-content;
+        padding: 15px;
+    }
+
+    .line {
+        width: 100%;
+    }
+
+    .quiz-btn {
+        width: 20vh; 
+        height: 4vh;
+        font-size: 20px;
+    }
+
+    .footer {
+        width: 100%;
+    }
+}
 </style>
 </head>
 
@@ -263,10 +297,10 @@ h2{margin: 10px 0; color: #ff0000;}
         <header class="header">
             <!-- <a href="#" class="logo">Yuth Portal</a> -->
             <nav class="navbar">
-                <a href="home.html">Home</a>
+                <a href="index.html">Home</a>
                 <a href="#">Info</a>
                 <a href="#">Help</a>
-                <a href="#">Vacancy</a>
+                <!-- <a href="#">Vacancy</a> -->
             </nav>
         </header>
 
