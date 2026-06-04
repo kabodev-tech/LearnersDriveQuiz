@@ -280,7 +280,7 @@
                 "B. The left side", 
                 "C. Any side", 
             ],
-            answer: 0
+            answer: 1
         },
         { numb: 17,
             level: "Entry Level", 
@@ -380,12 +380,11 @@
         },
         { numb: 25,
             level: "Entry Level", 
-            question: "A compulsory stop...", 
+            question: "A learner driver is not allowed to do which of the following?", 
             options: [
-                "A. You must stop your vehicle at the stop line or before entering the intersection", 
-                "B. You must slow down your vehicle and prepare to stop at the stop line or before entering the intersection", 
-                "C. You may stop your vehicle at a mini-circle", 
-                "D. You may stop your vehicle at a roundabout", 
+                "A. Leave the engine running while the vehicle is unattended", 
+                "B. Drive a motor vehicle without exceeding the speed limit", 
+                "C. Drive a public road while accompanied by a licensed driver", 
             ],
             answer: 0
         },
@@ -396,7 +395,7 @@
             options: [
                 "A. Procession of vehicles traveling together", 
                 "B. A group of cyclists riding together", 
-                "C. A procession of vehicles traveling together", 
+                "C. A procession of vehicles driving together in a sequence", 
             ],
             answer: 0  
         },
@@ -756,7 +755,7 @@
         function startQuiz() {
             currentQuestion = 0;
             selectedAnswers = [];
-            timer = 5 * 60; // 5 minute for quiz
+            timer = 8 * 60; // 8 minute for quiz
             timeEl.innerText = timer;
             shuffleArray(questions);
             updateTimerColor();
