@@ -755,7 +755,7 @@
         function startQuiz() {
             currentQuestion = 0;
             selectedAnswers = [];
-            timer = 8 * 60; // 8 minute for quiz
+            timer = 10 * 60; // 8 minute for quiz
             timeEl.innerText = timer;
             shuffleArray(questions);
             updateTimerColor();
@@ -941,7 +941,7 @@
             currentQuestion = 0;
             selectedAnswers = [];
             score = 0;
-            timer = 2 * 60; // 1 minute for retake
+            timer = 8 * 60; // 8 minute for retake
             timeEl.innerText = timer;
             startQuiz();
         }
