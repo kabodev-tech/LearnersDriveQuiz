@@ -103,7 +103,7 @@
             }
         }
 
-    // QUESTIONS DATA 
+     // QUESTIONS DATA 
     let questions = [
         // ==================== ENTRY LEVEL ====================
         // ==================== RULES of ROAD (30 QUESTIONS) ====================
@@ -118,7 +118,7 @@
                 ],
             answer: 2
         },
-        { numb: 2, 
+        { numb: 2,
             level: "Entry Level",
             question: "Who is responsible for ensuring that all passengers in a vehicle are wearing seatbelts while the vehicle is in motion?",
             // answer: "B. The driver of the vehicle is responsible for all passengers.", 
@@ -195,7 +195,7 @@
                 "C. He or she may start the engine whilst petrol or other inflammable fuel is being transferred to check if the fuel tank is fuel",
             ],
             answer: 0
-    },
+        },
         { numb: 9,
             level: "Entry Level",
             question: "Which one of the following statements is correct?",
@@ -276,7 +276,7 @@
             answer: 0
         },
 
-{ numb: 16,
+        { numb: 16,
             level: "Entry Level", 
             question: "In terms of the rules of the road you should drive your vehicle on the ...", 
             options: [
@@ -327,7 +327,7 @@
             answer: 1
         },
 
-        
+
         { numb: 21,
             level: "Entry Level", 
             question: "On a road or highway with more than one lane for traffic moving in opposite direction, you should ...", 
@@ -403,11 +403,59 @@
             ],
             answer: 0  
         },
+        // Begining of Question with Images 
+        { numb: 27,
+            level: "Hard", 
+            question: "This sign idicate that...",
+            image: "images/Railway crossing with 2 or more tracks.png", 
+            // answer: "C. There's railway crossing with 2 or more tracks"
+            options: [
+                "A. There's railway crossing ahead", 
+                "B. Danger zone ahead", 
+                "C. There's railway crossing with 2 or more tracks", 
+            ],
+            answer:  2 
+        },
+        { numb: 28,
+            level: "Hard", 
+            question: "As a driver, was does this sign indicate?", 
+            image: "images/Police flashing light sign.gif", 
+            // answer: "A. Police flashing light sign ahead"
+            options: [
+                "A. Police flashing light sign ahead", 
+                "B. Police traffic light ahead", 
+                "C. Police robot-light ahead", 
+            ],
+            answer: 0 
+        },
+        { numb: 29,
+            level: "Hard", 
+            question: "What is the meaning of this sign?", 
+            image: "images/Reduced visibility ahead.png", 
+            // answer: "B. Reduced visibility ahead", 
+            options: [
+                "A. Rain fall ahead", 
+                "B. Reduced visibility ahead", 
+                "C. Dust / strong winds ahead", 
+            ],
+            answer: 1    
+        },
+        { numb: 30,
+            level: "Hard", 
+            question: "This sign indicates to a driver that...", 
+            image: "images/Narrow bridge ahead.png", 
+            // answer: "B. There's Narrow bridge ahead", 
+            options: [
+                "A. Narrow bridge ahead", 
+                "B. There's a narrow bridge ahead", 
+                "C. There's a bridge ahead", 
+            ],
+            answer: 0   
+        },
 
-        
         // ============================ HARD LEVEL ============================ \\
         // ============================ ROAD TRAFFIC SIGNS, SIGNALS and MARKING (30 QUESTIONS)  ============================ \\
-        {numb: 31, 
+        {numb: 31,
             level: "Hard",
             question: "What does this sign indicate to the driver?", 
             image: "images/Vehicles conveying dangerous goods only sign.png", 
@@ -419,17 +467,17 @@
             ],
             answer: 2
         },
-        {numb: 32, 
+        {numb: 32,
             level: "Hard",
             image: "images/winding road sign.png",  
             question: "This sign warns you of ...", 
             // answer: "A", 
             options: [
-                "A. a winding road ahead, first right then left",
+                "A. a winding road ahead, first right",
                 "B. concealed driveways to the right and then left",
                 "C. a winding road ahead, first left",
             ],
-            answer: 2  
+            answer: 0  
         },
         {numb: 33,
             level: "Hard",
@@ -437,13 +485,13 @@
             image: "images/pedestrian crossing sign.png",
             // answer: "C. slow down and give way to pedestrians",
             options: [
-                "A. stop and allow people to cross",
-                "B. only pedestrian allow to walk",
-                "C. slow down and give way to pedestrians",
+                "A. Stop and allow people to cross",
+                "B. Only pedestrian allow to walk",
+                "C. Pedestrian crossing ahead",
             ],
             answer: 2 
         }, 
-        {numb: 34, 
+        {numb: 34,
             level: "Hard", 
             question: "What does this sign warns about", 
             image: "images/concealed driveway sign.png",  
@@ -467,8 +515,72 @@
                 "C. Vehicles taller than 4.5 metres are allowed to pass through with caution", 
             ],
         answer: 0
-        }, 
+        },
 
+        {numb: 36,
+            level: "Hard", 
+            question: "What does this sign indicate to a driver?", 
+            image: "images/Dual-carriage freeway begins.png", 
+            // answer: "1",
+            options: [ 
+                "A. There's a bridge ahead", 
+                "B. Dual-carriage freeway begins", 
+                "C. Dual-carriage freeway ends", 
+            ],
+        answer: 1 
+        },
+
+        {numb: 37,
+            level: "Hard", 
+            question: "If you are a driver, what must you do when come across this sign?", 
+            image: "images/Yield  or Give way to pedestrians.png", 
+            // answer: "C. Yield / give way to pedestrians", 
+            options: [ 
+                "A. Allow people to cross and then proceed with caution", 
+                "B. Give way to people crossing the road and then proceed with caution", 
+                "C. Yield / give way to pedestrians", 
+            ], 
+        answer: 2 
+        },
+
+        {numb: 38,
+            level: "Hard", 
+            question: "What does this sign indicate to a driver?",
+            image: "images/Danger flashing light sign.gif", 
+            // answer: ""A. Danger ahead, flashing light sign",
+            options: [
+                "A. Danger ahead, flashing light sign",
+                "B. Danger ahead, flashing light sign, proceed with caution",
+                "C. Danger ahead, flashing light sign, stop and wait for the light to stop flashing", 
+            ],
+             answer: 1 
+        },
+
+        {numb: 39,
+            level: "Hard", 
+            question: "What does this sign indicate to a driver?",
+            image: "images/Crosswinds ahead.png", 
+            // answer: "",
+            options: [
+                "A. Crosswinds ahead",
+                "B. Strong winds ahead",
+                "C. High winds ahead", 
+            ],
+        answer: 0
+        },
+
+        { numb: 39,
+            level: "Hard", 
+            question: "This sign brings your attention to:",
+            image: "images/Traffic signal sign.png",  
+            // answer: "B", 
+            options: [
+                "A. a traffic signal", 
+                "B. a traffic roadbloack", 
+                "C. emergency flashing traffic lights", 
+            ],
+            answer: 0 
+        },
 
         // ============================ Guidance Information Sign (10 Question) ============================ 
         {numb: 40,
@@ -510,7 +622,7 @@
         {numb: 43,
             level: "Hard",
             question: "This sign indicates to the driver of a vehicle that ...",
-            image: "images/Railway crossing ahead.jpg",
+            image: "images/Railway crossing ahead.png",
             //answer: "A. there is railway crossing ahead",
             options: [
                 "A. there is railway crossing ahead",
@@ -521,13 +633,13 @@
         },
         {numb: 44,
             level: "Hard", 
-            question: "What does R55 on the picture displayed mean to a driver?",
-            image: "images/GD-Sign.png", 
+            question: "What does this sign indicate to a driver?",
+            image: "images/Roundabout ahead.png", 
             // answer: "B. Reginal Road 55",
             options: [
-                "A. Rational Road 55",
-                "B. Reginal Road 55",
-                "C. Reserved Road 55", 
+                "A. There's circle ahead",
+                "B. Roundabout ahead",
+                "C. Swimming pool ahead", 
             ],
             answer: 1 
         },
@@ -549,29 +661,28 @@
         {numb: 46,
             level: "Hard",
             question: "This sign indicates to the driver of a vehicle that ...",
-            image: "images/Railway crossing ahead.jpg",
-            //answer: "A. there is railway crossing ahead",
+            image: "images/Abnormal vehicles prohibited.png",
+            //answer: "A. Abnormal vehicles prohibited",
             options: [
-                "A. there is railway crossing ahead",
-                "B. only trains allowed to cross",
-                "C. there is train station ahead",
-                "D. there is a train zone ahead",
+                "A. Abnormal vehicles prohibited",
+                "B. Acknowledged vehicles prohibited",
+                "C. Advanced vehicles prohibited",
             ],
             answer: 0
         },
         {numb: 47,
             level: "Hard", 
             question: "What does the following sign indicate to a driver?", 
-            image: "images/Arrestor bed exit 500m.png", 
+            image: "images/Arrest bead ahead 3km on the left.jpg", 
             // answer: "B", 
             options: [
                 "A. There's an arrestor bed ahead", 
-                "B. There's an arrestor bed exit ahed within 500m", 
-                "C. There's an arrestor bed ahead and exit", 
+                "B. There's an arrest bead ahead 3km on the left", 
+                "C. There's an arrestor bed ahead and exit on the left", 
             ],
             answer: 1
         },
-        {numb: 48, 
+        {numb: 48,
             level: "Hard", 
             question: "What does this sign indicate to a driver?", 
             image: "images/Road is slippery.png", 
@@ -586,12 +697,12 @@
         {numb: 49,
             level: "Hard", 
             question: "What does this sign mean?", 
-            image: "images/motorbike parking sign.jpeg", 
+            image: "images/Motorcycles prohibited.png", 
             // answer: "B", 
             options: [
-                "A. There's a motorbike parking area", 
-                "B. There is a temporary motorbike parking area ahead", 
-                "C. Temporary parking area for motorbike only", 
+                "A. Motorbike parking area", 
+                "B. Motorcycles prohibited", 
+                "C. Motorcycles only site", 
             ],
             answer: 1
         },
@@ -606,9 +717,10 @@
             ],
             answer: 2
         },
+        
 
         // ============================ HARDER LEVEL ============================
-        // ============================ VEHICLE CONTROL (8 QUESTIONS) ============================
+        // ============================ VEHICLE CONTROL (9 QUESTIONS) ============================
         {numb: 51,
             level: "Harder", 
             question: "Which two controls would you use during an emergecy stop?", 
@@ -713,8 +825,64 @@
                 "C. 10", 
             ], 
             answer: 0  
+        }, 
+        
+        // {numb: 60,
+        //     level: "Harder", 
+        //     question: "Which control is used to indicate to other road users that you intend on changing lanes?",            
+        //     image: "images/vehicle controls.png", 
+        //     options: [
+        //         "A. 2", 
+        //         "B. 1", 
+        //         "C. 10", 
+        //     ], 
+        //     answer: 0  
+        // }, 
+        // {numb: 61,
+        //     level: "Harder", 
+        //     question: "Which control is used to indicate to other road users that you intend on changing lanes?",            
+        //     image: "images/Motor bike controls.jpg", 
+        //     options: [
+        //         "A. 2", 
+        //         "B. 1", 
+        //         "C. 10", 
+        //     ], 
+        //     answer: 0  
+        // },
+        // {numb: 62,
+        //     level: "Harder", 
+        //     question: "Which control is used to indicate to other road users that you intend on changing lanes?",            
+        //     image: "images/Motor bike controls.jpg", 
+        //     options: [
+        //         "A. 2", 
+        //         "B. 1", 
+        //         "C. 10", 
+        //     ], 
+        //     answer: 0  
+        // }, 
+        {numb: 63,
+            level: "Harder", 
+            question: "This sign applies to which kind of vehicles?",            
+            image: "images/Applies to diplomatic vehicles.png", 
+            options: [
+                "A. Applies to diplomatic vehicles", 
+                "B. Applies to dangerous vehicles", 
+                "C. Applies to car drive", 
+                "D. None of the above"
+            ], 
+            answer: 0  
+        }, 
+        {numb: 64,
+            level: "Harder", 
+            question: "This sign indicate that...",            
+            image: "images/Overtaking prohibited for heavy vehicles.png", 
+            options: [
+                "A. Overtaking prohibited", 
+                "B. Single lane for trucks / heavy vehicles", 
+                "C. Overtaking prohibited for heavy vehicles", 
+            ], 
+            answer: 2   
         }
-
     ];
 
         // START SCREEN
